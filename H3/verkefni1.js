@@ -201,11 +201,29 @@ var _lastTime = performance.now();
 function render() {
     gl.clear( gl.COLOR_BUFFER_BIT );
 
+    // stop the game if score reached 10
+    if (score >= 10) {
+        // draw final scene (frog, cars, header, all ticks)
+        drawRect(-1.0, headerYMin, 1.0, headerYMax, vec4(0.75, 0.15, 0.20, 1.0));
+        var tickW = 0.178;
+        var tickGap = 0.02;
+        var tickY0 = headerYMin + 0.02;
+        var tickY1 = headerYMax - 0.1;
+        for (var i = 0; i < 10; i++) {
+            var x0 = -1.0 + 0.02 + i * (tickW + tickGap);
+            var x1 = x0 + tickW;
+            drawRect(x0, tickY0, x1, tickY1, vec4(1.0, 1.0, 1.0, 1.0));
+        }
+        return; // no more updates, freeze
+    }
+
+    // ... rest of your update code for cars, scoring, collisions, etc.
+
     var now = performance.now();
     var dt = Math.min(0.05, (now - _lastTime) / 1000.0);
     _lastTime = now;
 
-    // Upfærir staðsetningu bíla
+    // Uppfærir staðsetningu bíla
     for (var i = 0; i < cars.length; i++) {
       var c = cars[i];
       c.x += c.speed * c.dir * dt;
@@ -272,7 +290,7 @@ function render() {
     // --- 'Canvas' haus ---
     drawRect(-1.0, headerYMin, 1.0, headerYMax, vec4(0.75, 0.15, 0.20, 1.0));
 
-    // --- Stiginn ---
+    // --- Stigin ---
     var tickW = 0.178;
     var tickGap = 0.02;
     var tickY0 = headerYMin + 0.02;
