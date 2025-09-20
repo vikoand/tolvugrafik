@@ -12,8 +12,8 @@ var vertices;
 var ballBase;
 // Núverandi staðsetning miðju boltans (fernings)
 var ball = vec2( 0.0, 0.0 );
-var dX = 0.015;
-var dY = 0.02;
+var dX = 0.008;
+var dY = 0.010;
 
 var maxX = 1.0;
 var maxY = 1.0;
